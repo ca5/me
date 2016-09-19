@@ -5,7 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: "MS PGothic",Arial,"Hiragino Kaku Gothic ProN","Osaka",sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -1268,7 +1268,7 @@ h1,
 }
 h2,
 .h2 {
-  font-size: 20px;
+  font-size: 24px;
   margin-bottom: 30px;
 }
 h3,
@@ -5005,6 +5005,17 @@ a.badge:focus {
     font-size: 63px;
   }
 }
+@media screen and (max-width: 768px) {
+.jumbotron {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  color: inherit;
+  background:url(../img/mainvisual_sp.jpg) center no-repeat; 
+  background-size: cover;
+  height: auto;
+}
+}
 .thumbnail {
   display: block;
   padding: 4px;
@@ -6766,13 +6777,17 @@ button.close {
 .container h2, .container h3, .container h4{
 	 font-weight: normal;
 }
+.container h2{
+	/* color: #6f3;*/
+	/*border-bottom: 2px solid #6f3;*/
+}
 .container h3{
 	font-size:16px;
 	margin: 0;
 }
 .container h4{
-	font-size:12px;
-	color: #CCC;
+	font-size:11px;
+	color: #6f3;
 	margin: 0 0 10px 0;
 }
 .container p{
@@ -6789,10 +6804,20 @@ button.close {
 	border-bottom: 2px solid #6F3;
 	clear:both;
 }
+.navbar-logo{
+	padding: 15px 0 0 10px;
+	float: left;
+	font-size: 14px !important;
+	opacity:0.7;
+}
+.navbar-logo img{
+	margin-right: 5px;
+	width: 45px;
+}
 @media (max-width: 768px) {
 	.profile{
 	width: 100%;
-	margin: 220px 0 0 0;
+	margin: 300px 0 0 0;
 	padding: 20px 20px 12px 20px;
 	background-color: rgba(0,0,0,0.5);
 	border-bottom: 2px solid #6F3;
@@ -6802,6 +6827,9 @@ button.close {
 .profile .logo_area .logo{
 	float:left;
 	margin : 0 20px 20px 0;
+}
+.profile .logo_area .logo img{
+	width: 90px;
 }
 .profile .name_area{
 	float:left;
@@ -6836,10 +6864,31 @@ clear:both;
 }
 }*/
 .more .btn{
-	width: 480px;
+	width: 90%;
 }
 @media (max-width: 768px) {
-	width: 100%;
+.profile .logo_area .logo img{
+	width: 60px;
+}
+.profile h1{
+	margin:0;
+	font-size: 30px;
+	font-weight: normal;
+}
+.profile h2{
+	margin:0 0 5px 0;
+	font-size: 12px;
+	font-weight: normal;
+}
+.profile p{
+	font-size: 12.5px;
+	line-height: 1.3em;
+	margin-bottom: 8px;
+}
+}
+iframe{
+	background:#FFF;
+	border: 1px solid #ccc;
 }
 .more{
 	text-align: center;
