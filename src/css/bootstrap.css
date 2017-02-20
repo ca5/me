@@ -5011,7 +5011,7 @@ a.badge:focus {
   padding-bottom: 30px;
   margin-bottom: 20px;
   color: inherit;
-  background:url(../img/mainvisual_sp.jpg) center no-repeat; 
+  background:url(../img/mainvisual_sp.jpg) center no-repeat;
   background-size: cover;
   height: auto;
 }
@@ -6797,9 +6797,9 @@ button.close {
 	margin-bottom: 30px;
 }
 .profile{
-	width: 420px;
+	width: 460px;
 	margin-top: 180px;
-	padding: 20px 20px 12px 20px;
+	padding: 15px 15px 12px 15px;
 	background-color: rgba(0,0,0,0.5);
 	border-bottom: 2px solid #6F3;
 	clear:both;
