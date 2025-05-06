@@ -3,7 +3,7 @@ import React from 'react';
 export default function Discography() {
   return (
     <>
-      <div className="jumbotron">
+      <div className="p-5 mb-4 mainvidual">
         <div className="container">
           <div className="profile">
             <div className="logo_area">
@@ -37,28 +37,28 @@ export default function Discography() {
             <h3>ESC Sound Collections</h3>
             <h4>Compilation (#1 New World/Ca5)</h4>
             <a href="https://esctrax.bandcamp.com/album/esc-ex004-esc-sound-collection">
-              <img src="/img/ESCSC.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/ESCSC.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
             <h3>Chip Break In The Clouds</h3>
             <h4>Compilation (#11 Cassis and Soda/Ca5)</h4>
             <a href="https://bleeplove.bandcamp.com/album/chip-break-in-the-clouds">
-              <img src="/img/CBITC.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/CBITC.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
             <h3>Back to the 8bit</h3>
             <h4>Album</h4>
             <a href="https://esctrax.bandcamp.com/album/esc-003-back-to-the-8bit">
-              <img src="/img/BTT8.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/BTT8.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
             <h3>NewYearTracks2016</h3>
             <h4>Compilation (robinson(robi-chika mix)/Ca5)</h4>
             <a href="http://ameblo.jp/shcblog/entry-12114136069.html">
-              <img src="/img/NYT2016.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/NYT2016.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
         </div>
@@ -76,21 +76,21 @@ export default function Discography() {
             <h3>DYSTOPIA</h3>
             <h4>Album</h4>
             <a href="https://esctrax.bandcamp.com/album/esc-ex002-dystopia">
-              <img src="/img/DYSTOPIA.jpg" width="300px" height="300px" alt="dystopia"/>
+              <img src="/img/discography/DYSTOPIA.jpg" width="300px" height="300px" alt="dystopia"/>
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
             <h3>DMGRMXS</h3>
             <h4>Compilation (#1 オープニングBGM(ロックマン3), #3 時の回廊(クロノトリガー)/Ca5)</h4>
             <a href="https://esctrax.bandcamp.com/album/esc-ex003-dmg-rmxs">
-              <img src="/img/DMGRMXS.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/DMGRMXS.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
             <h3>Raindrop</h3>
             <h4>Remix (#3 Raindrop(Ca5 Remix)/Ca5)</h4>
             <a href="https://esctrax.bandcamp.com/album/esc-ex001-raindrop-ep">
-              <img src="/img/Raindrop.jpg" width="300px" height="300px" alt="raindrop"/>
+              <img src="/img/discography/Raindrop.jpg" width="300px" height="300px" alt="raindrop"/>
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
@@ -162,7 +162,7 @@ export default function Discography() {
             <h3>NKRN SELECTION</h3>
             <h4>Compilation (#2 mgmn3, #7 920(2013mix), #11 Snow Valley /Ca5)</h4>
             <a href="https://www.discogs.com/ja/Various-NKRN-SELECTION-Game-Music-Covers-/release/5045578">
-              <img src="/img/NKRNSL.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/NKRNSL.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
@@ -215,7 +215,7 @@ export default function Discography() {
             <h3>贄 killer 9 (nie killer nine) #5</h3>
             <h4>Compilation (#1 ふたりのボカロ/Ca5)</h4>
             <a href="https://nkrn.bandcamp.com/album/killer-9-nie-killer-nine-5">
-              <img src="/img/NKRN5.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/NKRN5.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
@@ -240,7 +240,7 @@ export default function Discography() {
             <h3>贄 killer 9 (nie killer nine) #4</h3>
             <h4>Compilation (#3 Snowy Vallay/Ca5)</h4>
             <a href="https://nkrn.bandcamp.com/album/killer-9-nie-killer-nine-4">
-              <img src="/img/NKRN4.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/NKRN4.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
@@ -271,14 +271,14 @@ export default function Discography() {
             <h3>贄 killer 9 (nie killer nine) #3</h3>
             <h4>Compilation (#1 mgmn/Ca5)</h4>
             <a href="https://nkrn.bandcamp.com/album/killer-9-nie-killer-nine-3">
-              <img src="/img/NKRN3.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/NKRN3.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
             <h3>贄 killer 9 (nie killer nine) #2</h3>
             <h4>Compilation (#1 920/Ca5)</h4>
             <a href="https://nkrn.bandcamp.com/album/killer-9-nie-killer-nine-2">
-              <img src="/img/NKRN2.jpg" alt="" width="300px" height="300px" />
+              <img src="/img/discography/NKRN2.jpg" alt="" width="300px" height="300px" />
             </a>
           </div>
           <div className="col-md-4 col-xs-12">
