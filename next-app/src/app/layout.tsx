@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Script from "next/script";
 import { ReactNode } from 'react';
 import type { Metadata } from 'next'; // Metadataをインポート
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,15 +50,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <p className="navbar-brand">Ca5.me</p>
               <button
                 type="button"
-                className="navbar-toggle"
+                className="navbar-toggler"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarContent"
                 aria-expanded="false"
                 aria-controls="navbarContent"
                 aria-label="Toggle navigation"
               >
-                <span className="navbar-toggler-icon"></span>
-                <span className="navbar-toggler-icon"></span>
                 <span className="navbar-toggler-icon"></span>
               </button>
             <div id="navbarContent" className="collapse navbar-collapse">
@@ -66,7 +65,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   <Link href="/" className="nav-link active" aria-current="page">Home</Link>
                 </li>
                 <li className="nav-item">
-                  {/* legacyBehavior と <a> を削除し、クラス名を Link に移動 */}
                   <Link href="/discography" className="nav-link">
                     Discography
                   </Link>
@@ -101,9 +99,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <p>Copyright &copy; 2016 Ca5 all rights reserved.</p>
           </footer>
         </div>
-        {/* BootstrapのJavaScriptが必要な場合は、Next/Scriptコンポーネントを使って読み込むことを推奨 */}
-        {/* 例: import Script from 'next/script'; */}
-        {/* <Script src="/js/bootstrap.bundle.min.js" strategy="lazyOnload" /> */}
+
+        {/* Bootstrap JavaScript Bundle with Popper */}
+        <Script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+          crossOrigin="anonymous"
+          strategy="lazyOnload" // ページ読み込み後に実行
+        />
       </body>
     </html>
   );
