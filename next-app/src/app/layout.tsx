@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import type { Metadata } from 'next'; // Metadataをインポート
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // グローバルCSSをインポート (globals.css が src/app にある場合)
 import './globals.css';
@@ -35,56 +36,54 @@ export const metadata: Metadata = {
 // ルートレイアウトコンポーネント
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ja"> {/* 必要に応じて言語コードを修正 */}
+    <html lang="ja">
       <head>
         {/* Bootstrap CSS の読み込み (public/css/bootstrap.css にある場合) */}
         {/* App Routerでは <head> 内に直接 <link> を書くことも可能 */}
-        <link href="/css/bootstrap.css" rel="stylesheet" />
+        {/* <link href="/css/bootstrap.css" rel="stylesheet" /> */}
         {/* Google Fonts など外部CSSもここに記述可能 */}
       </head>
       <body> {/* bodyに共通クラスやフォントスタイルを適用 */}
-        <nav className="navbar navbar-inverse navbar-fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
-            <div className="navbar-header">
-              <p className="navbar-logo">Ca5.me</p>
+              <p className="navbar-brand">Ca5.me</p>
               <button
                 type="button"
-                className="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#navbar"
+                className="navbar-toggle"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
                 aria-expanded="false"
-                aria-controls="navbar"
+                aria-controls="navbarContent"
+                aria-label="Toggle navigation"
               >
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
+                <span className="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon"></span>
               </button>
-            </div>
-            <div id="navbar" className="collapse navbar-collapse">
-              <ul className="nav navbar-nav">
-                <li>
-                  <Link href="/">Home</Link>
+            <div id="navbarContent" className="collapse navbar-collapse">
+              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <Link href="/" className="nav-link active" aria-current="page">Home</Link>
                 </li>
-                <li>
+                <li className="nav-item">
                   {/* legacyBehavior と <a> を削除し、クラス名を Link に移動 */}
-                  <Link href="/discography" className="nav-border">
+                  <Link href="/discography" className="nav-link">
                     Discography
                   </Link>
                 </li>
-                <li>
-                  <a href="https://twitter.com/Ca5" className="nav-border" target="_blank" rel="noopener noreferrer">
+                <li className="nav-item">
+                  <a href="https://twitter.com/Ca5" className="nav-link" target="_blank" rel="noopener noreferrer">
                     Twitter
                   </a>
                 </li>
-                <li>
-                  <a href="https://soundcloud.com/ca54makske" target="_blank" rel="noopener noreferrer">Soundcloud</a>
+                <li className="nav-item">
+                  <a href="https://soundcloud.com/ca54makske" className="nav-link" target="_blank" rel="noopener noreferrer">Soundcloud</a>
+                </li>
+                <li className="nav-item">
+                  <a href="http://blog.ca5.me/" className="nav-link" target="_blank" rel="noopener noreferrer">Blog</a>
                 </li>
                 <li>
-                  <a href="http://blog.ca5.me/" target="_blank" rel="noopener noreferrer">Blog</a>
-                </li>
-                <li>
-                  <a href="/#contact">Contact</a>
+                  <a href="/#contact" className="nav-link">Contact</a>
                   {/* もしトップページ以外からトップのContactへ飛ばす場合 */}
                   {/* <Link href="/#contact">Contact</Link> */}
                 </li>
