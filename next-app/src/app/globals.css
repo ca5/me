@@ -14,15 +14,20 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 
 /* === ここから bootstrap.css から移動したカスタムスタイル === */
-.container {
+/* .container {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 0;
   margin-bottom: 0;
-  /*background-image:url(../img/mainvisual.jpg) #000;*/
-}
+} */
+/* @media screen and (max-width: 768px) {
+  .container{
+    margin-right: 0;
+    margin-left: 0;
+  }
+} */
 
 .container h2, .container h3, .container h4{
    font-weight: normal;
@@ -73,7 +78,7 @@ h1, .h1, h2, .h2, h3, .h3 {
   margin-bottom:0;
   border-bottom: 2px solid #00ff1e;
 }
-@media (max-width: 767px) { /* Bootstrap v5 のブレークポイント (md) とほぼ同じ */
+@media (max-width: 767.98px) { /* Bootstrap v5 のブレークポイント (md) とほぼ同じ */
   .profile{
   width: 100%;
   margin: 300px 0 0 0; /* 上マージンが大きい点に注意 */
@@ -81,7 +86,14 @@ h1, .h1, h2, .h2, h3, .h3 {
   background-color: rgba(0,0,0,0.5);
   border-bottom: 2px solid #6F3; /* Bootstrap v5 では --bs-success などで管理推奨 */
   /* clear:both; */ /* Flex/Gridレイアウトでは不要な場合が多い */
-}
+  }
+  .container {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+    max-width: 100%;
+  }
 }
 .profile .logo_area .logo{
   float:left;
@@ -113,7 +125,7 @@ h1, .h1, h2, .h2, h3, .h3 {
   margin-bottom: 8px;
 }
 
-.mainvidual{
+.mainvisual{
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 20px;
@@ -124,11 +136,12 @@ h1, .h1, h2, .h2, h3, .h3 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 550px;
+  /* height: 550px; */
+  height: auto;
 }
 
-@media screen and (max-width: 768px) {
-  .mainvidual{
+@media (max-width: 767.98px) {
+  .mainvisual{
   background-image: url(/img/mainvisual_sp.jpg);
   height: auto;
   }

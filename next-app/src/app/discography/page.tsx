@@ -3,7 +3,7 @@ import React from 'react';
 export default function Discography() {
   return (
     <>
-      <div className="p-5 mb-4 mainvidual">
+      <div className="p-5 mb-4 mainvisual">
         <div className="container">
           <div className="profile">
             <div className="logo_area">
@@ -315,9 +315,9 @@ export default function Discography() {
         <div className="row">
           <div className="col-md-12 col-xs-12 contact">
             <ul>
-            <li><a href=""><img src="/img/ic_blog.png" width="50" alt="blog"/></a></li>
-            <li><a href=""><img src="/img/ic_soundcloud.png" width="50" alt="soundcloud"/></a></li>
-            <li><a href=""><img src="/img/ic_twitter.png" width="50" alt="twitter"/></a></li>
+            <li><a href="http://blog.ca5.me/"><img src="/img/ic_blog.png" width="50" alt="blog"/></a></li>
+            <li><a href="https://soundcloud.com/ca54makske"><img src="/img/ic_soundcloud.png" width="50" alt="soundcloud"/></a></li>
+            <li><a href="https://twitter.com/Ca5"><img src="/img/ic_twitter.png" width="50" alt="twitter"/></a></li>
             </ul>
           </div>
         </div>
