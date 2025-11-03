@@ -70,12 +70,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a href="https://twitter.com/Ca5" className="nav-link" target="_blank" rel="noopener noreferrer">
-                    Twitter
+                  <a href="https://x.com/Ca5" className="nav-link" target="_blank" rel="noopener noreferrer">
+                    X
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a href="https://soundcloud.com/ca54makske" className="nav-link" target="_blank" rel="noopener noreferrer">Soundcloud</a>
+                  <a href="https://soundcloud.com/ca54makske" className="nav-link" target="_blank" rel="noopener noreferrer">SoundCloud</a>
                 </li>
                 <li className="nav-item">
                   <a href="http://blog.ca5.me/" className="nav-link" target="_blank" rel="noopener noreferrer">Blog</a>
