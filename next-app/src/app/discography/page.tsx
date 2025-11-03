@@ -252,7 +252,7 @@ export default function Discography() {
           </div>
           <div className="col-md-4 col-xs-12">
             <h3>color EP</h3>
-            <h4>Compilation (#2 evergreen,#4 U-YAKE walk'in(Ca5 remix)/Ca5)</h4>
+            <h4>Compilation (#2 evergreen,#4 U-YAKE walk&apos;in(Ca5 remix)/Ca5)</h4>
             <a href="http://www.otherman-records.com/releases/OTMN010">
               <img src="http://www.archive.org/download/OTMN010/folder.jpg" alt="" width="300px" height="300px" />
             </a>

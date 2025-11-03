@@ -81,9 +81,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   <a href="http://blog.ca5.me/" className="nav-link" target="_blank" rel="noopener noreferrer">Blog</a>
                 </li>
                 <li>
-                  <a href="/#contact" className="nav-link">Contact</a>
-                  {/* もしトップページ以外からトップのContactへ飛ばす場合 */}
-                  {/* <Link href="/#contact">Contact</Link> */}
+                  <Link href="/#contact" className="nav-link" scroll={false}>Contact</Link>
                 </li>
               </ul>
             </div>
