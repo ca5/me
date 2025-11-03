@@ -99,7 +99,7 @@ export default function Discography() {
             <ul>
             <li><a href="http://blog.ca5.me/"><img src="/img/ic_blog.png" width="50" alt="blog"/></a></li>
             <li><a href="https://soundcloud.com/ca54makske"><img src="/img/ic_soundcloud.png" width="50" alt="soundcloud"/></a></li>
-            <li><a href="https://twitter.com/Ca5"><img src="/img/ic_twitter.png" width="50" alt="twitter"/></a></li>
+            <li><a href="https://x.com/Ca5"><img src="/img/ic_twitter.png" width="50" alt="twitter"/></a></li>
             </ul>
           </div>
         </div>
