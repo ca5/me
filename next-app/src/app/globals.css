@@ -1,0 +1,225 @@
+
+/* globals.css */
+body {
+  background-color: #000; /* 例: Bootstrap v5 の light グレー */
+  color: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* padding-top: 56px; */ /* Navbar の高さに応じて調整 */
+}
+
+/* type.less より移植 */
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* === ここから bootstrap.css から移動したカスタムスタイル === */
+/* .container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+} */
+/* @media screen and (max-width: 768px) {
+  .container{
+    margin-right: 0;
+    margin-left: 0;
+  }
+} */
+
+.container h2, .container h3, .container h4{
+   font-weight: normal;
+}
+.container h2{
+  /* color: #6f3;*/
+  /*border-bottom: 2px solid #6f3;*/
+}
+.container h3{
+  font-size:16px;
+  margin: 0;
+}
+.container h4{
+  font-size:11px;
+  color: #6f3; /* Bootstrap v5 では --bs-success などで管理推奨 */
+  margin: 0 0 10px 0;
+}
+.container p{
+  font-size: 12px;
+}
+/* .col-md-4{ */ /* Bootstrap v5 の col-md-4 と競合するためコメントアウト推奨 or クラス名変更 */
+  /* margin-bottom: 30px; */
+/* } */
+.profile{
+  width: 420px;
+  margin-top: 180px;
+  padding: 20px 20px 12px 20px;
+  background-color: rgba(0,0,0,0.5);
+  border-bottom: 2px solid #6F3; /* Bootstrap v5 では --bs-success などで管理推奨 */
+  clear:both; /* Flex/Gridレイアウトでは不要な場合が多い */
+}
+.navbar {
+  padding: 0;
+}
+.navbar-brand{ /* Navbar の構造変更に伴い、不要または修正が必要な可能性 */
+  padding: 15px 0 0 10px;
+  /* float: left; */ /* Flexboxレイアウトでは不要な場合が多い */
+  font-size: 14px !important;
+  opacity:0.7;
+}
+.navbar-brand img{
+  margin-right: 5px;
+  width: 45px;
+}
+
+.navbar-nav{
+  margin-top:0;
+  margin-bottom:0;
+  border-bottom: 2px solid #00ff1e;
+}
+@media (max-width: 767.98px) { /* Bootstrap v5 のブレークポイント (md) とほぼ同じ */
+  .profile{
+  width: 100%;
+  margin: 300px 0 0 0; /* 上マージンが大きい点に注意 */
+  padding: 20px 20px 12px 20px;
+  background-color: rgba(0,0,0,0.5);
+  border-bottom: 2px solid #6F3; /* Bootstrap v5 では --bs-success などで管理推奨 */
+  /* clear:both; */ /* Flex/Gridレイアウトでは不要な場合が多い */
+  }
+  .container {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+    max-width: 100%;
+  }
+}
+.profile .logo_area .logo{
+  float:left;
+  margin : 0 20px 20px 0;
+}
+.profile .logo_area .logo img{
+  width: 90px;
+}
+.profile .name_area{
+  float:left;
+  margin : 5px 0 0 0;
+}
+.profile .text_area{
+  clear:both;
+}
+.profile h1{
+  margin:0 0 5px 0;
+  font-size: 48px;
+  font-weight: normal;
+}
+.profile h2{
+  margin:0 0 5px 0;
+  font-size: 16px;
+  font-weight: normal;
+}
+.profile p{
+  font-size: 12.5px;
+  line-height: 1.3em;
+  margin-bottom: 8px;
+}
+
+.mainvisual{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  background-color: transparent;
+  color: inherit;
+  /* background:url(/img/mainvisual.jpg) center no-repeat; background-size: cover; */
+  background-image: url(/img/mainvisual.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* height: 550px; */
+  height: auto;
+}
+
+@media (max-width: 767.98px) {
+  .mainvisual{
+  background-image: url(/img/mainvisual_sp.jpg);
+  height: auto;
+  }
+}
+
+
+
+
+
+.more .btn{ /* .more クラス内の btn に適用 */
+  width: 90%; /* ボタン幅を90%にするスタイル */
+}
+@media (max-width: 767px) { /* Bootstrap v5 のブレークポイント (md) とほぼ同じ */
+.profile .logo_area .logo img{
+  width: 60px;
+}
+.profile h1{
+  margin:0;
+  font-size: 30px;
+  font-weight: normal;
+}
+.profile h2{
+  margin:0 0 5px 0;
+  font-size: 12px;
+  font-weight: normal;
+}
+.profile p{
+  font-size: 12.5px;
+  line-height: 1.3em;
+  margin-bottom: 8px;
+}
+}
+iframe{
+  background:#FFF; /* iframe の背景を白に */
+  border: 1px solid #ccc; /* iframe に枠線 */
+    /* レスポンシブ対応を追加推奨 */
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* YouTubeの場合。SoundCloudは調整 */
+}
+.more{
+  text-align: center; /* .more クラスのテキストを中央揃え */
+  margin-bottom: 50px;
+}
+.contact{
+  margin-bottom: 30px;
+}
+.contact a{
+  color: #fff; /* .contact 内のリンク色 */
+}
+.contact a:hover{
+  color: #00ff1e; /* .contact 内のリンクホバー色 */
+  text-decoration: none;
+}
+.contact ul{
+  /* content: " "; */ /* CSS content プロパティは通常 ::before/::after で使用 */
+    /* display: table; */ /* Flexbox で代替推奨 */
+  list-style: outside none none;
+  /* font-size: 0; */ /* li間の空白削除のため？ Flexbox (gap) で代替推奨 */
+  margin: 20px 0 0 0;
+  padding: 0;
+    /* Bootstrap v5 移行時に追加したスタイルも含む */
+    display: flex;
+    gap: 1rem;
+    justify-content: center; /* 中央寄せする場合 */
+}
+.contact li{
+  /* display: inline-block; */ /* Flexbox の子要素になるため不要 */
+  /* margin:0 10px 0 0; */ /* gap で代替 */
+  text-decoration: none;
+}
+.contact li :hover{ /* セレクタ注意: li の子要素すべてに適用される */
+  opacity: 0.8;
+}
+footer{
+  margin: 30px 0;
+}
+footer p{
+  color: #555; /* フッターの文字色 */
+}
+/* === ここまでカスタムスタイル === */
