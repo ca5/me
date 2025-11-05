@@ -1,14 +1,19 @@
-import React from 'react';
-import Link from 'next/link';
-import { getWorks, WorkItem } from './lib/spreadsheet';
+"use client";
 
-export default async function Home() {
-  let worksData: WorkItem[] = [];
-  try {
-    worksData = await getWorks();
-  } catch (error) {
-    console.error('Error fetching works data:', error);
-  }
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { WorkItem, getWorks } from './lib/spreadsheet'; // getWorks is now a client-side fetcher
+
+export default function Home() {
+  const [worksData, setWorksData] = useState<WorkItem[]>([]);
+
+  useEffect(() => {
+    async function loadData() {
+      const data = await getWorks();
+      setWorksData(data);
+    }
+    loadData();
+  }, []);
 
   return (
     <>

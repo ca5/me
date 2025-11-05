@@ -1,15 +1,18 @@
-import React from 'react';
-import { getDiscography, DiscographyData } from '../lib/spreadsheet';
+"use client";
 
-export default async function Discography() {
-  let discographyData: DiscographyData = {};
+import React, { useEffect, useState } from 'react';
+import { DiscographyData, getDiscography } from '../lib/spreadsheet';
 
-  try {
-    discographyData = await getDiscography();
-  } catch (error) {
-    console.error('Error fetching discography data:', error);
-    return <p>Error loading discography data.</p>;
-  }
+export default function Discography() {
+  const [discographyData, setDiscographyData] = useState<DiscographyData>({});
+
+  useEffect(() => {
+    async function loadData() {
+      const data = await getDiscography();
+      setDiscographyData(data);
+    }
+    loadData();
+  }, []);
 
   const years = Object.keys(discographyData).sort((a, b) => parseInt(b) - parseInt(a));
 
