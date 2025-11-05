@@ -1,18 +1,30 @@
-"use client";
+import React from 'react';
+import fs from 'fs';
+import path from 'path';
 
-import React, { useEffect, useState } from 'react';
-import { DiscographyData, getDiscography } from '../lib/spreadsheet';
+type DiscographyItem = {
+  title: string;
+  type: string;
+  description: string;
+  url: string;
+  imageUrl: string | null;
+};
+
+type DiscographyData = {
+  [year: string]: DiscographyItem[];
+};
 
 export default function Discography() {
-  const [discographyData, setDiscographyData] = useState<DiscographyData>({});
+  const discographyPath = path.join(process.cwd(), 'src', 'app', 'discography', 'discography.json');
+  let discographyData: DiscographyData = {};
 
-  useEffect(() => {
-    async function loadData() {
-      const data = await getDiscography();
-      setDiscographyData(data);
-    }
-    loadData();
-  }, []);
+  try {
+    const fileContents = fs.readFileSync(discographyPath, 'utf8');
+    discographyData = JSON.parse(fileContents);
+  } catch (error) {
+    console.error('Error reading or parsing discography.json:', error);
+    return <p>Error loading discography data.</p>;
+  }
 
   const years = Object.keys(discographyData).sort((a, b) => parseInt(b) - parseInt(a));
 

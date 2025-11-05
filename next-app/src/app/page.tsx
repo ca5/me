@@ -1,19 +1,25 @@
-"use client";
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { WorkItem, getWorks } from './lib/spreadsheet'; // getWorks is now a client-side fetcher
+import fs from 'fs';
+import path from 'path';
+
+type WorkItem = {
+  title: string;
+  description: string;
+  type: 'soundcloud' | 'youtube';
+  src: string;
+};
 
 export default function Home() {
-  const [worksData, setWorksData] = useState<WorkItem[]>([]);
+  const worksPath = path.join(process.cwd(), 'src', 'app', 'works.json');
+  let worksData: WorkItem[] = [];
 
-  useEffect(() => {
-    async function loadData() {
-      const data = await getWorks();
-      setWorksData(data);
-    }
-    loadData();
-  }, []);
+  try {
+    const fileContents = fs.readFileSync(worksPath, 'utf8');
+    worksData = JSON.parse(fileContents);
+  } catch (error) {
+    console.error('Error reading or parsing works.json:', error);
+  }
 
   return (
     <>
