@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import fs from 'fs';
 import path from 'path';
 
@@ -27,7 +28,7 @@ export default function Home() {
         <div className="container">
           <div className="profile">
             <div className="logo_area">
-              <p className="logo"><img src="/img/logo.svg" alt="logo" /></p>
+              <p className="logo"><Image src="/img/logo.svg" alt="logo" width={90} height={90} /></p>
             </div>
             <div className="name_area">
               <h1>Ca5</h1>
@@ -89,17 +90,17 @@ export default function Home() {
             <ul>
               <li>
                 <a href="http://blog.ca5.me/">
-                  <img src="/img/ic_blog.png" width="50" alt="blog" />
+                  <Image src="/img/ic_blog.png" alt="blog" width={50} height={50} />
                 </a>
               </li>
               <li>
                 <a href="https://soundcloud.com/ca54makske">
-                  <img src="/img/ic_soundcloud.png" width="50" alt="soundcloud" />
+                  <Image src="/img/ic_soundcloud.png" alt="soundcloud" width={50} height={50} />
                 </a>
               </li>
               <li>
                 <a href="https://x.com/Ca5">
-                  <img src="/img/ic_twitter.png" width="50" alt="X" />
+                  <Image src="/img/ic_twitter.png" alt="X" width={50} height={50} />
                 </a>
               </li>
             </ul>

@@ -136,8 +136,7 @@ h1, .h1, h2, .h2, h3, .h3 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  /* height: 550px; */
-  height: auto;
+  height: 550px;
 }
 
 @media (max-width: 767.98px) {

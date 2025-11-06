@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import fs from 'fs';
 import path from 'path';
 
@@ -34,7 +35,7 @@ export default function Discography() {
         <div className="container">
           <div className="profile">
             <div className="logo_area">
-              <p className="logo"><img src="/img/logo.svg" alt="logo" /></p>
+              <p className="logo"><Image src="/img/logo.svg" alt="logo" width={90} height={90} /></p>
             </div>
             <div className="name_area">
               <h1>Discography</h1>
@@ -68,7 +69,7 @@ export default function Discography() {
                   <h4>{item.type} {item.description && `(${item.description})`}</h4>
                   <a href={item.url}>
                     {item.imageUrl ? (
-                      <img src={item.imageUrl} alt={item.title} width="300px" height="300px" />
+                      <Image src={item.imageUrl} alt={item.title} width={300} height={300} />
                     ) : (
                       'Link'
                     )}
@@ -97,9 +98,9 @@ export default function Discography() {
         <div className="row">
           <div className="col-md-12 col-xs-12 contact">
             <ul>
-            <li><a href="http://blog.ca5.me/"><img src="/img/ic_blog.png" width="50" alt="blog"/></a></li>
-            <li><a href="https://soundcloud.com/ca54makske"><img src="/img/ic_soundcloud.png" width="50" alt="soundcloud"/></a></li>
-            <li><a href="https://x.com/Ca5"><img src="/img/ic_twitter.png" width="50" alt="twitter"/></a></li>
+            <li><a href="http://blog.ca5.me/"><Image src="/img/ic_blog.png" alt="blog" width={50} height={50} /></a></li>
+            <li><a href="https://soundcloud.com/ca54makske"><Image src="/img/ic_soundcloud.png" alt="soundcloud" width={50} height={50} /></a></li>
+            <li><a href="https://x.com/Ca5"><Image src="/img/ic_twitter.png" alt="twitter" width={50} height={50} /></a></li>
             </ul>
           </div>
         </div>
