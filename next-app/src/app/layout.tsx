@@ -1,7 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
 import Script from "next/script";
 import { ReactNode } from 'react';
+import NavigationMenu from './components/NavigationMenu'; // NavigationMenuをインポート
 import type { Metadata } from 'next'; // Metadataをインポート
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -60,30 +60,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <span className="navbar-toggler-icon"></span>
               </button>
             <div id="navbarContent" className="collapse navbar-collapse">
-              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <Link href="/" className="nav-link active" aria-current="page">Home</Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/discography" className="nav-link">
-                    Discography
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <a href="https://x.com/Ca5" className="nav-link" target="_blank" rel="noopener noreferrer">
-                    X
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="https://soundcloud.com/ca54makske" className="nav-link" target="_blank" rel="noopener noreferrer">SoundCloud</a>
-                </li>
-                <li className="nav-item">
-                  <a href="http://blog.ca5.me/" className="nav-link" target="_blank" rel="noopener noreferrer">Blog</a>
-                </li>
-                <li>
-                  <Link href="/#contact" className="nav-link" scroll={false}>Contact</Link>
-                </li>
-              </ul>
+              <NavigationMenu />
             </div>
           </div>
         </nav>
