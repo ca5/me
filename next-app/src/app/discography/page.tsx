@@ -1,29 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
-import fs from 'fs';
-import path from 'path';
+import { getDiscography, DiscographyData } from '../lib/spreadsheet';
 
-type DiscographyItem = {
-  title: string;
-  type: string;
-  description: string;
-  url: string;
-  imageUrl: string | null;
-};
-
-type DiscographyData = {
-  [year: string]: DiscographyItem[];
-};
-
-export default function Discography() {
-  const discographyPath = path.join(process.cwd(), 'src', 'app', 'discography', 'discography.json');
+export default async function Discography() {
   let discographyData: DiscographyData = {};
 
   try {
-    const fileContents = fs.readFileSync(discographyPath, 'utf8');
-    discographyData = JSON.parse(fileContents);
+    discographyData = await getDiscography();
   } catch (error) {
-    console.error('Error reading or parsing discography.json:', error);
+    console.error('Error fetching discography data:', error);
     return <p>Error loading discography data.</p>;
   }
 

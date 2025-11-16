@@ -1,25 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import fs from 'fs';
-import path from 'path';
+import { getWorks, WorkItem } from './lib/spreadsheet';
 
-type WorkItem = {
-  title: string;
-  description: string;
-  type: 'soundcloud' | 'youtube';
-  src: string;
-};
-
-export default function Home() {
-  const worksPath = path.join(process.cwd(), 'src', 'app', 'works.json');
+export default async function Home() {
   let worksData: WorkItem[] = [];
 
   try {
-    const fileContents = fs.readFileSync(worksPath, 'utf8');
-    worksData = JSON.parse(fileContents);
+    worksData = await getWorks();
   } catch (error) {
-    console.error('Error reading or parsing works.json:', error);
+    console.error('Error fetching works data:', error);
   }
 
   return (
