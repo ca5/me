@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import Script from "next/script";
 import { ReactNode } from 'react';
 import NavigationMenu from './components/NavigationMenu'; // NavigationMenuをインポート

@@ -20,12 +20,12 @@ export type DiscographyData = {
   [year: string]: DiscographyItem[];
 };
 
-const SPREADSHEET_ID = '1Kg4U1YVHSAlR2Q5dayDQOIPCrTocHaDSjtIlTh47L5I';
-const WORKS_GID = '0';
-const DISCOGRAPHY_GID = '33803131';
+const SPREADSHEET_PUB_ID = '2PACX-1vQt6Gfu28w-60QiOb57bhw-pyd9i66nA4leISszI-O8B-tDGdw-MYp6ojlt2FQgGy3vzi9nos0kyZcF';
+const WORKS_GID = '1772800433';
+const DISCOGRAPHY_GID = '0';
 
-const WORKS_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${WORKS_GID}`;
-const DISCOGRAPHY_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&gid=${DISCOGRAPHY_GID}`;
+const WORKS_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_PUB_ID}/pub?gid=${WORKS_GID}&single=true&output=csv`;
+const DISCOGRAPHY_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_PUB_ID}/pub?gid=${DISCOGRAPHY_GID}&single=true&output=csv`;
 
 /**
  * Fetches and parses a public Google Sheet CSV from a given URL using Papaparse.
@@ -37,6 +37,7 @@ async function fetchAndParseCsv<T>(url: string): Promise<T[]> {
       throw new Error(`Failed to fetch CSV: ${response.statusText}`);
     }
     const csvText = await response.text();
+    console.log("Fetched CSV Text:", csvText); // Log the fetched CSV text
 
     return new Promise((resolve, reject) => {
       Papa.parse<T>(csvText, {
@@ -44,6 +45,7 @@ async function fetchAndParseCsv<T>(url: string): Promise<T[]> {
         dynamicTyping: true,
         skipEmptyLines: true,
         complete: (results) => {
+          console.log("Parsed Data:", results.data); // Log the parsed data
           resolve(results.data);
         },
         error: (error: Error) => {
