@@ -32,7 +32,7 @@ const DISCOGRAPHY_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SPREADSH
  */
 async function fetchAndParseCsv<T>(url: string): Promise<T[]> {
   try {
-    const response = await fetch(url, { cache: 'no-store' });
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Failed to fetch CSV: ${response.statusText}`);
     }
