@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { getDiscography, DiscographyData } from '../lib/spreadsheet';
 
+
 export default async function Discography() {
   let discographyData: DiscographyData = {};
 

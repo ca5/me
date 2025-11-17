@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getWorks, WorkItem } from './lib/spreadsheet';
 
+
 export default async function Home() {
   let worksData: WorkItem[] = [];
 
