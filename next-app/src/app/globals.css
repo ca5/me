@@ -156,6 +156,7 @@ h1, .h1, h2, .h2, h3, .h3 {
 @media (max-width: 767px) { /* Bootstrap v5 のブレークポイント (md) とほぼ同じ */
 .profile .logo_area .logo img{
   width: 60px;
+  height: auto;
 }
 .profile h1{
   margin:0;
