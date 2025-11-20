@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 10px; }
+    #upload-form { display: flex; flex-direction: column; }
+    input[type="file"] { margin-bottom: 10px; }
+    button { padding: 8px 12px; }
+    #status { margin-top: 10px; font-style: italic; }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 2s linear infinite;
+      display: none; /* Initially hidden */
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="upload-form">
+    <label for="file-input">画像ファイルを選択:</label>
+    <input type="file" id="file-input" accept="image/jpeg,image/png,image/gif">
+    <button id="upload-button">アップロード</button>
+  </div>
+  <div id="status"></div>
+  <div class="spinner" id="spinner"></div>
+
+  <script>
+    document.getElementById('upload-button').addEventListener('click', function() {
+      const fileInput = document.getElementById('file-input');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        document.getElementById('status').innerText = 'ファイルが選択されていません。';
+        return;
+      }
+
+      // Validate file type
+      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!validTypes.includes(file.type)) {
+        document.getElementById('status').innerText = '無効なファイルタイプです。JPEG, PNG, GIFを選択してください。';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('status').innerText = 'アップロード中...';
+        document.getElementById('spinner').style.display = 'block'; // Show spinner
+
+        const fileData = {
+          fileName: file.name,
+          mimeType: file.type,
+          file: e.target.result.split(',')[1] // Get base64 content
+        };
+
+        google.script.run
+          .withSuccessHandler(function(url) {
+            google.script.run
+              .withSuccessHandler(function() {
+                document.getElementById('status').innerText = 'アップロード完了！';
+                document.getElementById('spinner').style.display = 'none'; // Hide spinner
+              })
+              .withFailureHandler(function(err) {
+                document.getElementById('status').innerText = 'URLの書き込みに失敗: ' + err.message;
+                document.getElementById('spinner').style.display = 'none'; // Hide spinner
+              })
+              .insertUrlIntoCell(url);
+          })
+          .withFailureHandler(function(err) {
+            document.getElementById('status').innerText = 'アップロード失敗: ' + err.message;
+            document.getElementById('spinner').style.display = 'none'; // Hide spinner
+          })
+          .uploadFile(fileData);
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
