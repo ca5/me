@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install dependencies
+        working-directory: ./next-app
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy to GitHub Pages
+        working-directory: ./next-app
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          pnpm run deploy
