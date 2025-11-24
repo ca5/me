@@ -21,24 +21,27 @@ function showSidebar() {
  * @return {string} The direct link URL of the uploaded file.
  */
 function uploadFile(fileData) {
-  const FOLDER_NAME = 'static_site_assets';
-
   try {
     // Decode the base64 file content.
     const decodedFile = Utilities.base64Decode(fileData.file);
     const blob = Utilities.newBlob(decodedFile, fileData.mimeType, fileData.fileName);
 
-    // Find the target folder or create it if it doesn't exist.
-    let folder;
-    const folders = DriveApp.getFoldersByName(FOLDER_NAME);
-    if (folders.hasNext()) {
-      folder = folders.next();
+    // Get the parent folder of the active spreadsheet.
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    const spreadsheetFile = DriveApp.getFileById(spreadsheet.getId());
+    const parents = spreadsheetFile.getParents();
+
+    let uploadFolder;
+    if (parents.hasNext()) {
+      // If the spreadsheet is in a folder, use that folder as the destination.
+      uploadFolder = parents.next();
     } else {
-      folder = DriveApp.createFolder(FOLDER_NAME);
+      // If the spreadsheet is in the root directory, use the root as the destination.
+      uploadFolder = DriveApp.getRootFolder();
     }
 
-    // Create the file in the specified folder.
-    const file = folder.createFile(blob);
+    // Create the file in the determined folder.
+    const file = uploadFolder.createFile(blob);
 
     // Set file permissions to "anyone with the link can view".
     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
