@@ -46,8 +46,8 @@ function uploadFile(fileData) {
     // Set file permissions to "anyone with the link can view".
     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
 
-    // Return the direct link URL for the file.
-    return `https://drive.google.com/uc?export=view&id=${file.getId()}`;
+    // Return the direct link URL for the file in a format suitable for embedding.
+    return `https://lh3.googleusercontent.com/d/${file.getId()}`;
   } catch (e) {
     // Log the error and throw an exception to be caught by the client-side failure handler.
     console.error(`File upload failed: ${e.toString()}`);
