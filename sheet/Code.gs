@@ -49,9 +49,9 @@ function uploadFile(fileData) {
     // Return the direct link URL for the file.
     return `https://drive.google.com/uc?export=view&id=${file.getId()}`;
   } catch (e) {
-    // Log the error and return an error message.
+    // Log the error and throw an exception to be caught by the client-side failure handler.
     console.error(`File upload failed: ${e.toString()}`);
-    return `エラー: ${e.toString()}`;
+    throw new Error(`アップロードに失敗しました: ${e.message}`);
   }
 }
 
