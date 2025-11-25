@@ -47,3 +47,6 @@ pnpm_dev.log
 # Test screenshots
 homepage.png
 discography.png
+
+# Downloaded Google Drive images
+/public/img/googledrive/

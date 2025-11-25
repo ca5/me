@@ -1,4 +1,7 @@
 import Papa from 'papaparse';
+import fs from 'fs/promises';
+import path from 'path';
+import { Buffer } from 'buffer';
 
 // Type definitions remain the same
 export type WorkItem = {
@@ -76,11 +79,52 @@ export const getDiscography = async (): Promise<DiscographyData> => {
   type DiscographyRow = DiscographyItem & { year: string };
   const items = await fetchAndParseCsv<DiscographyRow>(DISCOGRAPHY_CSV_URL);
 
-  const discography: DiscographyData = {};
+  // The directory where images will be saved
+  const imageDir = path.join(process.cwd(), 'public', 'img', 'googledrive');
+  // Ensure the directory exists
+  await fs.mkdir(imageDir, { recursive: true });
 
-  items.forEach(item => {
+  const processedItems = await Promise.all(items.map(async (item) => {
+    if (item.imageUrl && item.imageUrl.startsWith('https://drive.google.com/')) {
+      try {
+        const response = await fetch(item.imageUrl);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch image: ${response.statusText}`);
+        }
+
+        // Determine file extension from Content-Type header
+        const contentType = response.headers.get('content-type');
+        const extensionMap: { [key: string]: string } = {
+          'image/jpeg': '.jpg',
+          'image/png': '.png',
+          'image/gif': '.gif',
+        };
+        const extension = contentType ? extensionMap[contentType] : '.jpg'; // Default to .jpg
+
+        const buffer = Buffer.from(await response.arrayBuffer());
+
+        // Sanitize title to create a safe filename
+        const sanitizedTitle = item.title.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        const filename = `${item.year}-${sanitizedTitle}${extension}`;
+        const localPath = path.join(imageDir, filename);
+
+        // Save the file
+        await fs.writeFile(localPath, buffer);
+
+        // Update the imageUrl to the new local relative path
+        item.imageUrl = `/img/googledrive/${filename}`;
+      } catch (error) {
+        console.error(`Failed to download image for "${item.title}":`, error);
+        // If download fails, set imageUrl to null to avoid broken links
+        item.imageUrl = null;
+      }
+    }
+    return item;
+  }));
+
+  const discography: DiscographyData = {};
+  processedItems.forEach(item => {
     if (item.year && item.title) {
-      // Papaparse with dynamicTyping might convert year to number, so convert it back to string.
       const yearStr = String(item.year);
       if (!discography[yearStr]) {
         discography[yearStr] = [];
