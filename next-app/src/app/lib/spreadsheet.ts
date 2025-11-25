@@ -1,7 +1,9 @@
 import Papa from 'papaparse';
 import fs from 'fs/promises';
 import path from 'path';
-import { Buffer } from 'buffer';
+import { google, drive_v3 } from 'googleapis';
+import { GoogleAuth } from 'google-auth-library';
+import { Writable } from 'stream';
 
 // Type definitions remain the same
 export type WorkItem = {
@@ -81,41 +83,75 @@ export const getDiscography = async (): Promise<DiscographyData> => {
 
   // The directory where images will be saved
   const imageDir = path.join(process.cwd(), 'public', 'img', 'googledrive');
-  // Ensure the directory exists
   await fs.mkdir(imageDir, { recursive: true });
 
+  // --- Google Drive API Setup ---
+  const credentialsJson = process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON;
+  let drive: drive_v3.Drive | null; // Define drive client here
+
+  if (credentialsJson) {
+    try {
+      const auth = new GoogleAuth({
+        credentials: JSON.parse(credentialsJson),
+        scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+      });
+      drive = google.drive({ version: 'v3', auth });
+    } catch (error) {
+      console.warn('Could not initialize Google Drive API. Skipping image downloads.', error);
+      drive = null;
+    }
+  } else {
+    console.warn('GOOGLE_APPLICATION_CREDENTIALS_JSON is not set. Skipping Google Drive image downloads.');
+    drive = null;
+  }
+
   const processedItems = await Promise.all(items.map(async (item) => {
-    if (item.imageUrl && item.imageUrl.startsWith('https://drive.google.com/')) {
+    // Only process if the API client is available and the URL is a Google Drive link
+    if (drive && item.imageUrl && item.imageUrl.startsWith('https://drive.google.com/')) {
       try {
-        const response = await fetch(item.imageUrl);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch image: ${response.statusText}`);
-        }
+        // Extract file ID from the URL
+        const fileIdMatch = item.imageUrl.match(/id=([a-zA-Z0-9_-]+)/);
+        if (!fileIdMatch) throw new Error('Could not parse file ID from URL');
+        const fileId = fileIdMatch[1];
 
-        // Determine file extension from Content-Type header
-        const contentType = response.headers.get('content-type');
+        // Get file metadata to determine the extension
+        const { data: fileMetadata } = await drive.files.get({ fileId, fields: 'mimeType' });
+        const mimeType = fileMetadata.mimeType;
         const extensionMap: { [key: string]: string } = {
-          'image/jpeg': '.jpg',
-          'image/png': '.png',
-          'image/gif': '.gif',
+          'image/jpeg': '.jpg', 'image/png': '.png', 'image/gif': '.gif',
         };
-        const extension = contentType ? extensionMap[contentType] : '.jpg'; // Default to .jpg
+        const extension = mimeType ? extensionMap[mimeType] : '.jpg';
 
-        const buffer = Buffer.from(await response.arrayBuffer());
+        // Download the file content
+        const { data: fileStream } = await drive.files.get(
+          { fileId, alt: 'media' },
+          { responseType: 'stream' }
+        );
 
-        // Sanitize title to create a safe filename
-        const sanitizedTitle = item.title.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-        const filename = `${item.year}-${sanitizedTitle}${extension}`;
+        // Convert stream to buffer
+        const chunks: Buffer[] = [];
+        const buffer = await new Promise<Buffer>((resolve, reject) => {
+          const writable = new Writable({
+            write(chunk, encoding, callback) {
+              chunks.push(Buffer.from(chunk));
+              callback();
+            },
+          });
+          writable.on('finish', () => resolve(Buffer.concat(chunks)));
+          writable.on('error', reject);
+          fileStream.pipe(writable);
+        });
+
+        // Sanitize title for filename, allowing Japanese characters
+        const sanitizedTitle = item.title.replace(/[\\/:*?"<>|]/g, '_');
+        const filename = `${item.year}-${sanitizedTitle}-${fileId}${extension}`;
         const localPath = path.join(imageDir, filename);
 
-        // Save the file
         await fs.writeFile(localPath, buffer);
-
-        // Update the imageUrl to the new local relative path
         item.imageUrl = `/img/googledrive/${filename}`;
+
       } catch (error) {
-        console.error(`Failed to download image for "${item.title}":`, error);
-        // If download fails, set imageUrl to null to avoid broken links
+        console.error(`Failed to download image for "${item.title}" (URL: ${item.imageUrl}):`, error);
         item.imageUrl = null;
       }
     }
