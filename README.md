@@ -57,7 +57,34 @@ GOOGLE_APPLICATION_CREDENTIALS_JSON='{ "type": "service_account", "project_id": 
 
 #### デプロイ環境 (Vercel, Netlifyなど)
 
-各ホスティングサービスの管理画面から、以下の環境変数を設定してください。
+各ホスティングサービスの管理画面から環境変数を設定してください。
+
+##### GitHub Actions
+
+現在のこのリポジトリのようにGitHub Actionsでビルドとデプロイを行う場合は、以下の手順で設定します。
+
+1.  リポジトリのページで `Settings` > `Secrets and variables` > `Actions` を開きます。
+2.  `Repository secrets` のセクションで `New repository secret` ボタンをクリックします。
+3.  **Name** に `GOOGLE_APPLICATION_CREDENTIALS_JSON` と入力します。
+4.  **Secret** の入力欄に、ステップ4でダウンロードしたサービスアカウントのJSONキーファイルの中身**全体**を貼り付けます。
+5.  `Add secret` ボタンをクリックして保存します。
+
+これにより、`.github/workflows/deploy.yml` のようなワークフローファイル内で、以下のようにシークレットを環境変数としてビルドステップに渡すことができるようになります。
+
+```yaml
+      - name: Deploy to GitHub Pages
+        working-directory: ./next-app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          pnpm run deploy
+```
+
+##### その他のホスティングサービス (Vercel, Netlifyなど)
 
 -   **環境変数名**: `GOOGLE_APPLICATION_CREDENTIALS_JSON`
 -   **値**: ステップ4でダウンロードしたJSONファイルの中身**全体**を、改行などを削除せずそのままコピーして貼り付けます。
