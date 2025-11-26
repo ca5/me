@@ -30,8 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files
+.env*.local
+.env
 
 # vercel
 .vercel
@@ -47,3 +48,6 @@ pnpm_dev.log
 # Test screenshots
 homepage.png
 discography.png
+
+# Downloaded Google Drive images
+/public/img/googledrive/
