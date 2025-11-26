@@ -145,7 +145,7 @@ export const getDiscography = async (): Promise<DiscographyData> => {
         // Sanitize title for filename: replace spaces with underscores and remove invalid characters.
         const sanitizedTitle = item.title
           .replace(/\s+/g, '_') // Replace spaces with underscores
-          .replace(/[\\/:*?"<>|()]/g, ''); // Remove invalid filesystem chars and parentheses
+          .replace(/[\\/:*?"<>|()#]/g, ''); // Remove invalid filesystem chars and parentheses
         const filename = `${item.year}-${sanitizedTitle}-${fileId}${extension}`;
         const localPath = path.join(imageDir, filename);
 
