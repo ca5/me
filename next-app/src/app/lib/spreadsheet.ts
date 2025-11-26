@@ -142,8 +142,10 @@ export const getDiscography = async (): Promise<DiscographyData> => {
           fileStream.pipe(writable);
         });
 
-        // Sanitize title for filename, allowing Japanese characters
-        const sanitizedTitle = item.title.replace(/[\\/:*?"<>|]/g, '_');
+        // Sanitize title for filename: replace spaces with underscores and remove invalid characters.
+        const sanitizedTitle = item.title
+          .replace(/\s+/g, '_') // Replace spaces with underscores
+          .replace(/[\\/:*?"<>|()]/g, ''); // Remove invalid filesystem chars and parentheses
         const filename = `${item.year}-${sanitizedTitle}-${fileId}${extension}`;
         const localPath = path.join(imageDir, filename);
 
