@@ -44,9 +44,22 @@ ca5.me
 
 ### ステップ6：認証情報を環境変数として設定
 
-ビルドサーバー（Vercel, Netlify, GitHub Actionsなど）やローカルの開発環境で、以下の環境変数を設定する必要があります。
+#### ローカル開発環境
+
+1.  `next-app`ディレクトリにある`.env.example`ファイルをコピーし、`.env.local`という名前のファイルを作成します。
+2.  作成した`.env.local`ファイルを開き、ステップ4でダウンロードしたJSONキーファイルの中身**全体**を`GOOGLE_APPLICATION_CREDENTIALS_JSON`の値として貼り付けます。
+
+```.env.local
+GOOGLE_APPLICATION_CREDENTIALS_JSON='{ "type": "service_account", "project_id": ... }'
+```
+
+`.env.local`ファイルは`.gitignore`によってバージョン管理から除外されるため、認証情報がリポジトリにコミットされることはありません。
+
+#### デプロイ環境 (Vercel, Netlifyなど)
+
+各ホスティングサービスの管理画面から、以下の環境変数を設定してください。
 
 -   **環境変数名**: `GOOGLE_APPLICATION_CREDENTIALS_JSON`
 -   **値**: ステップ4でダウンロードしたJSONファイルの中身**全体**を、改行などを削除せずそのままコピーして貼り付けます。
 
-以上の設定が完了すると、`pnpm build`を実行した際に、プログラムがサービスアカウントとしてGoogle Drive APIを認証し、共有されたフォルダから画像を安全にダウンロードできるようになります。
+以上の設定が完了すると、ローカルでの`pnpm build`やデプロイ時に、プログラムがサービスアカウントとしてGoogle Drive APIを認証し、共有されたフォルダから画像を安全にダウンロードできるようになります。
