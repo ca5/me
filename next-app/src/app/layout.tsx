@@ -2,6 +2,8 @@ import React from 'react';
 import Script from "next/script";
 import { ReactNode } from 'react';
 import NavigationMenu from './components/NavigationMenu'; // NavigationMenuをインポート
+import { GoogleTagManager } from './components/GoogleTagManager';
+import { Suspense } from 'react';
 import type { Metadata } from 'next'; // Metadataをインポート
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -45,6 +47,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         {/* Google Fonts など外部CSSもここに記述可能 */}
       </head>
       <body> {/* bodyに共通クラスやフォントスタイルを適用 */}
+        <Suspense>
+          <GoogleTagManager />
+        </Suspense>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
               <p className="navbar-brand">Ca5.me</p>
